@@ -183,6 +183,13 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
     "(Progress bar is disabled by default if there is no tty attached)",
     is_flag=True,
 )
+@click.option(
+    "--skip-first",
+    help="Skip the first x photos (default: 0)",
+    type=click.IntRange(0),
+    default=0,
+)
+
 @click.version_option()
 # pylint: disable-msg=too-many-arguments,too-many-statements
 # pylint: disable-msg=too-many-branches,too-many-locals
@@ -213,6 +220,7 @@ def main(
         log_level,
         no_progress_bar,
         notification_script,
+        skip_first
 ):
     """Download all iCloud photos to a local directory"""
     logger = setup_logger()
@@ -259,6 +267,7 @@ def main(
     # Default album is "All Photos", so this is the same as
     # calling `icloud.photos.all`.
     photos = icloud.photos.albums[album]
+    photos.skip_first = skip_first
 
     if list_albums:
         albums_dict = icloud.photos.albums
