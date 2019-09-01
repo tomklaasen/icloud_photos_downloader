@@ -450,10 +450,19 @@ def main(
                 local_modified = datetime.datetime.fromtimestamp(os.path.getmtime(download_path))
                 print("local_modified: %s" % local_modified)
                 print("created_date: %s" % created_date)
-                print("local_modified == created_date : %s" % (local_modified == created_date))
-                file_exists = file_exists and (local_modified == created_date)
-            else:
-                print("file does not exist")
+                file_exists = file_exists and (local_modified.year == created_date.year)
+                if file_exists:
+                    file_exists = file_exists and (local_modified.month == created_date.month)
+                if file_exists:
+                    file_exists = file_exists and (local_modified.day == created_date.day)
+                if file_exists:
+                    file_exists = file_exists and (local_modified.hour == created_date.hour)
+                if file_exists:
+                    file_exists = file_exists and (local_modified.minute == created_date.minute)
+                if file_exists:
+                    file_exists = file_exists and (local_modified.second == created_date.second)
+                
+                print("file_exists : %s" % file_exists)
 
             if file_exists:
                 if until_found is not None:
