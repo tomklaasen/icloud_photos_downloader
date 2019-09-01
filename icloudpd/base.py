@@ -448,9 +448,9 @@ def main(
 
             if file_exists:
                 local_modified = datetime.datetime.fromtimestamp(os.path.getmtime(download_path))
-                logger.info("local_modified: %s" % local_modified)
-                logger.info("created_date: %s" % created_date)
-                logger.info("local_modified == created_date : %s" % (local_modified == created_date))
+                print("local_modified: %s" % local_modified)
+                print("created_date: %s" % created_date)
+                print("local_modified == created_date : %s" % (local_modified == created_date))
                 file_exists = file_exists and (local_modified == created_date)
 
             if file_exists:
