@@ -452,6 +452,8 @@ def main(
                 print("created_date: %s" % created_date)
                 print("local_modified == created_date : %s" % (local_modified == created_date))
                 file_exists = file_exists and (local_modified == created_date)
+            else:
+                print("file does not exist")
 
             if file_exists:
                 if until_found is not None:
